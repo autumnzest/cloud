@@ -12,17 +12,17 @@ app = Flask(__name__)
 def home():
     return 'hello:)'
 
-@app.route('/api/<instance_id>', methods=['POST'])
+@app.route('/api/<string:instance_id>', methods=['POST'])
 def startup(instance_id):
-    return 'hello:)' % instance_id
+    return 'instance{}'.format(instance_id)
 
-@app.route('/api/instances/<instance_id>', methods=['GET'])
-def status():
-    return 'hello:)'
+@app.route('/api/instances/<string:instance_id>', methods=['GET'])
+def status(instance_id):
+    return 'instance{}'.format(instance_id)
 
-@app.route('/api/instances/<instance_id>', methods=['GET'])
+@app.route('/api/instances/<string:instance_id>', methods=['DELETE'])
 def delete(instance_id):
-    return 'hello:)' % instance_id
+    return 'instance{}'.format(instance_id)
 
 if __name__ == '__main__':
     app.run()
