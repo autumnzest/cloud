@@ -20,12 +20,12 @@ class test_data(db.Model):
     def __init__(self, instance_name):
         self.instance_name = instance_name
 
-@app.route('/', methods=['GET'])
+@app.route('/cloud', methods=['GET'])
 def home():
     instance_list = test_data.query.all()
     return 'hello:)'
 
-@app.route('/api/<string:instance_id>', methods=['POST'])
+@app.route('/api/instances/<string:instance_id>', methods=['POST'])
 def startup(instance_id):
     return 'instance{}'.format(instance_id)
 
@@ -36,6 +36,19 @@ def status(instance_id):
 @app.route('/api/instances/<string:instance_id>', methods=['DELETE'])
 def delete(instance_id):
     return 'instance{}'.format(instance_id)
+
+@app.route('/api/pubkey', methods=['GET'])
+def get_pubkey():
+    return ''
+
+@app.route('/api/pubkey/<string:pubkey_id>', methods=['GET'])
+def get_pubkey():
+    return ''
+
+@app.route('/api/pubkey/<string:pubkey_id>', methods=['GET'])
+def get_pubkey_id():
+    return ''
+
 
 if __name__ == '__main__':
     app.run()
