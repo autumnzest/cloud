@@ -4,7 +4,7 @@
 import json
 from functools import wraps
 from flask_sqlalchemy import SQLAlchemy
-from flask import Flask, jsonify, request, url_for, abort, Response
+from flask import Flask, jsonify, request, url_for, abort, Response, render_template
 
 app = Flask(__name__)
 #TODO:testをcloudに
@@ -20,10 +20,10 @@ class test_data(db.Model):
     def __init__(self, instance_name):
         self.instance_name = instance_name
 
-@app.route('/cloud', methods=['GET'])
+@app.route('/', methods=['GET'])
 def home():
-    instance_list = test_data.query.all()
-    return 'hello:)'
+    #instance_list = test_data.query.all()
+    return render_template('index.html')
 
 @app.route('/api/instances/<string:instance_id>', methods=['POST'])
 def startup(instance_id):
@@ -37,17 +37,17 @@ def status(instance_id):
 def delete(instance_id):
     return 'instance{}'.format(instance_id)
 
-@app.route('/api/pubkey', methods=['GET'])
-def get_pubkey():
-    return ''
+#@app.route('/api/pubkey', methods=['GET'])
+#def get_pubkey():
+#    return ''
 
-@app.route('/api/pubkey/<string:pubkey_id>', methods=['GET'])
-def get_pubkey():
-    return ''
+#@app.route('/api/pubkey/<string:pubkey_id>', methods=['GET'])
+#def get_pubkey():
+#    return ''
 
-@app.route('/api/pubkey/<string:pubkey_id>', methods=['GET'])
-def get_pubkey_id():
-    return ''
+#@app.route('/api/pubkey/<string:pubkey_id>', methods=['GET'])
+#def get_pubkey_id():
+#    return ''
 
 
 if __name__ == '__main__':
