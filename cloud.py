@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 
 import json
+import database
+#import accesslibrary
 from functools import wraps
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, jsonify, request, url_for, abort, Response, render_template
@@ -12,27 +14,25 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root@localhost/tes
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
 
-#TODO:test_dataをinstance_listに
-class test_data(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    instance_name= db.Column(db.String(80), unique=True)
+instance_list_class = database.instance_list
 
-    def __init__(self, instance_name):
-        self.instance_name = instance_name
-
-@app.route('/', methods=['GET'])
+@app.route('/cloud', methods=['GET'])
 def home():
-    #instance_list = test_data.query.all()
-    return render_template('index.html')
+    instance_list = instance_list_class.query.all()
+    return render_template('index.html', list=instance_list)
 
-@app.route('/api/instances/<string:instance_id>', methods=['POST'])
+#新規インスタンス起動
+@app.route('/api/instances/', methods=['POST'])
 def startup(instance_id):
     return 'instance{}'.format(instance_id)
 
+#インスタンスの状態をチェック
 @app.route('/api/instances/<string:instance_id>', methods=['GET'])
 def status(instance_id):
-    return 'instance{}'.format(instance_id)
+    status = instance_list_class.query.filter_by(id=instance_id).one()
+    return format(status.status)
 
+#インスタンスの終了
 @app.route('/api/instances/<string:instance_id>', methods=['DELETE'])
 def delete(instance_id):
     return 'instance{}'.format(instance_id)
