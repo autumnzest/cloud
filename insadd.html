@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<title>r</title>
+<style type="text/css">
+    html{font-size:12px;}
+    fieldset{width:300px; margin: 0 auto;}
+    legend{font-weight:bold; font-size:14px;}
+    .label{float:left; width:70px; margin-left:10px;}
+    .left{margin-left:80px;}
+    .input{width:150px;}
+    span{color: #666666;}
+</style>
+<script language=JavaScript>
+<!--
+
+function InputCheck(InsForm)
+{
+  if (InsForm.ins_name.value == "")
+  {
+    alert("Name入力してください!");
+    InsForm.ins_name.focus();
+    return (false);
+  }
+  if (InsForm.ip_addr.value == "")
+  {
+    alert("IPADD入力してください!");
+    InsForm.ip_addr.focus();
+    return (false);
+  }
+}
+
+//-->
+</script>
+</head>
+<body>
+<div>
+<fieldset>
+<legend>register</legend>
+<form name="InsForm" method="post" action="insadd.php" onSubmit="return InputCheck(this)">
+<p>
+<label for="ins_name" class="label">ins_name:</label>
+<input id="ins_name" name="ins_name" type="text" class="input" />
+<p/>
+<p>
+<label for="ip_addr" class="label">ip_addr:</label>
+<input id="ip_addr" name="ip_addr" type="text" class="input" />
+<p/>
+<p>
+<label for="ram" class="label">ram:</label>
+<input id="ram" name="ram" type="text" class="input" />
+<p/>
+<p>
+<label for="vcpus" class="label">vcpus:</label>
+<input id="vcpus" name="vcpus" type="text" class="input" />
+<p/>
+<p>
+<input type="submit" name="submit" value=" O K  " class="left" />
+</p>
+</form>
+</fieldset>
+</div>
+</body>
+</html>

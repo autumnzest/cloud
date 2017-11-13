@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<title>keyadd</title>
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+<script language=JavaScript>
+<!--
+
+function InputCheck(KeyForm)
+{
+  if (KeyForm.keyname.value == "")
+  {
+    alert("Name入力してください!");
+    KeyForm.keyname.focus();
+    return (false);
+  }
+}
+
+//-->
+</script>
+</head>
+<body>
+<div>
+<fieldset>
+<legend>keyregister</legend>
+<form name="KeyForm" method="post" action="keyadd.php" onSubmit="return InputCheck(this)">
+<p>
+<label for="keyname" class="label">Keyname</label>
+<input id="keyname" name="keyname" type="text" class="input" />
+<p/>
+<p>
+<input type="submit" name="submit" value=" O K  " class="left" />
+</p>
+</form>
+</fieldset>
+</div>
+</body>
+</html>

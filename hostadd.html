@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<title>r</title>
+<style type="text/css">
+    html{font-size:12px;}
+    fieldset{width:300px; margin: 0 auto;}
+    legend{font-weight:bold; font-size:14px;}
+    .label{float:left; width:70px; margin-left:10px;}
+    .left{margin-left:80px;}
+    .input{width:150px;}
+    span{color: #666666;}
+</style>
+<script language=JavaScript>
+<!--
+
+function InputCheck(HostForm)
+{
+  if (HostForm.hostname.value == "")
+  {
+    alert("Name入力してください!");
+    HostForm.hostname.focus();
+    return (false);
+  }
+  if (HostForm.total.value == "")
+  {
+    alert("Space入力してください!");
+    HostForm.total.focus();
+    return (false);
+  }
+}
+
+//-->
+</script>
+</head>
+<body>
+<div>
+<fieldset>
+<legend>hostregister</legend>
+<form name="HostForm" method="post" action="hostadd.php" onSubmit="return InputCheck(this)">
+<p>
+<label for="hostname" class="label">Hostname</label>
+<input id="hostname" name="hostname" type="text" class="input" />
+<p/>
+<p>
+<label for="total" class="label">Space:</label>
+<input id="total" name="total" type="text" class="input" />
+<p/>
+<p>
+<input type="submit" name="submit" value=" O K  " class="left" />
+</p>
+</form>
+</fieldset>
+</div>
+</body>
+</html>
