@@ -3,7 +3,7 @@
 
 import json
 import database
-#import accesslibrary
+import accesslibrary
 from functools import wraps
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, jsonify, request, url_for, abort, Response, render_template
@@ -21,10 +21,26 @@ def home():
     instance_list = instance_list_class.query.all()
     return render_template('index.html', list=instance_list)
 
+
+######API群######
+
 #新規インスタンス起動
 @app.route('/api/instances/', methods=['POST'])
-def startup(instance_id):
-    return 'instance{}'.format(instance_id)
+def startup():
+    name = request.form['name']
+    vcpu = request.form['vcpu']
+    ram = request.form['ram']
+
+    ins = instance_list_class(name=name, vcpus=vcpu,ram=ram, status="starting")
+    db.session.add(ins)
+    db.session.commit()
+    db.session.close()
+
+    params = {"name":"name", "vcpu":"vcpu", "ram":"ram"}
+
+    accesslibrary.install.install(params)
+
+    return 'instance{}'.format(name)
 
 #インスタンスの状態をチェック
 @app.route('/api/instances/<string:instance_id>', methods=['GET'])
@@ -36,18 +52,6 @@ def status(instance_id):
 @app.route('/api/instances/<string:instance_id>', methods=['DELETE'])
 def delete(instance_id):
     return 'instance{}'.format(instance_id)
-
-#@app.route('/api/pubkey', methods=['GET'])
-#def get_pubkey():
-#    return ''
-
-#@app.route('/api/pubkey/<string:pubkey_id>', methods=['GET'])
-#def get_pubkey():
-#    return ''
-
-#@app.route('/api/pubkey/<string:pubkey_id>', methods=['GET'])
-#def get_pubkey_id():
-#    return ''
 
 
 if __name__ == '__main__':
