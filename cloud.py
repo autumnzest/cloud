@@ -16,7 +16,7 @@ db = SQLAlchemy(app)
 
 instance_list_class = database.instance_list
 
-@app.route('/', methods=['GET'])
+@app.route('/cloud', methods=['GET'])
 def home():
     instance_list = instance_list_class.query.all()
     return render_template('index.html', list=instance_list)
