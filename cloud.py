@@ -36,7 +36,7 @@ def startup():
     db.session.commit()
     db.session.close()
 
-    params = {"name":"name", "vcpu":"vcpu", "ram":"ram"}
+    params = {"name":name, "vcpu":vcpu, "ram":ram}
 
     res = accesslibrary.install.install(params)
 
@@ -57,9 +57,33 @@ def status(instance_id):
     return format(status.status)
 
 #インスタンスの終了
-@app.route('/api/instances/<string:instance_id>', methods=['DELETE'])
-def delete(instance_id):
-    return 'instance{}'.format(instance_id)
+@app.route('/api/instances/shutoff', methods=['DELETE'])
+def delete():
+
+    name = request.form['name']
+
+    params = {"name":name}
+    res = accesslibrary.destroy.shutdown(params)
+
+    instance_data = instance_list_class.query.filter(name==name).first()
+    instance_data.status = "terminating"
+
+    ##無理やりの対応....
+    current_db_sessions = db.session.object_session(instance_data)
+    current_db_sessions.add(instance_data)
+    current_db_sessions.commit()
+    current_db_sessions.close()
+
+    res = accesslibrary.destroy.destroy(params)
+
+    instance_data = instance_list_class.query.filter(name==name).first()
+    instance_data.status = "terminated"
+    current_db_sessions = db.session.object_session(instance_data)
+    current_db_sessions.add(instance_data)
+    current_db_sessions.commit()
+    current_db_sessions.close()
+
+    return 'instance'.format(name)
 
 
 if __name__ == '__main__':
