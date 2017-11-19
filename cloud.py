@@ -16,7 +16,7 @@ db = SQLAlchemy(app)
 
 instance_list_class = database.instance_list
 
-@app.route('/cloud', methods=['GET'])
+@app.route('/', methods=['GET'])
 def home():
     instance_list = instance_list_class.query.all()
     return render_template('index.html', list=instance_list)
@@ -57,7 +57,7 @@ def status(instance_id):
     return format(status.status)
 
 #インスタンスの終了
-@app.route('/api/instances/shutoff', methods=['DELETE'])
+@app.route('/api/instances/shutdown', methods=['DELETE'])
 def delete():
 
     name = request.form['name']

@@ -16,13 +16,6 @@ def install(params):
     vcpu = params['vcpu'] if 'vcpu' in params.keys() else 1
     ram = params['ram'] if 'ram' in params.keys() else 1024
 
-    domain_ids = c.listDomainsID()
-
-    for id in domain_ids:
-        vm = c.lookupByID(id)
-        if name == vm.name():
-            return
-
     cmd = 'virt-install --name={0} --vcpus={1} --ram={2} \
 --location=http://mirror.centos.org/centos/7/os/x86_64/ \
 --disk path=/var/kvm/disk/{0}.qcow2,format=qcow2,size=8 \
@@ -35,7 +28,7 @@ def install(params):
 
     ## for debug
     print(cmd) 
-    #subprocess.call(cmd,shell=True)
+    subprocess.call(cmd,shell=True)
 
     return 1
 
