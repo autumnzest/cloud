@@ -38,7 +38,15 @@ def startup():
 
     params = {"name":"name", "vcpu":"vcpu", "ram":"ram"}
 
-    accesslibrary.install.install(params)
+    res = accesslibrary.install.install(params)
+
+    instance_data = instance_list_class.query.filter(name==name).first()
+    instance_data.status = "initializing"
+
+    current_db_sessions = db.session.object_session(instance_data)
+    current_db_sessions.add(instance_data)
+    current_db_sessions.commit()
+    current_db_sessions.close()
 
     return 'instance{}'.format(name)
 

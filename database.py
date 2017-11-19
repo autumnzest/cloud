@@ -21,8 +21,8 @@ class instance_list(db.Model):
     autostart = db.Column(db.String(5))
     ssh_id = db.Column(db.Integer)
     ram    = db.Column(db.String(10))
-    vcpus   = db.Column(db.String(10))
-    status   = db.Column(db.String(10))
+    vcpus   = db.Column(db.String(20))
+    status   = db.Column(db.String(30))
     created_at  = db.Column(db.DATETIME)
     updated_at  = db.Column(db.DATETIME)
 
