@@ -3,8 +3,17 @@
         <meta charset="UTF-8">
         <title>inslist</title>
         <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     </head>
     <body >
+
+    <form action="./api/instances/" method="post">
+        <span>name:</span><input type="text" type="name">
+        <span>cpu:</span><input type="number" name="cpu" value="1">
+        <span>ram:</span><input type="number" name="ram" value="1024">
+        <button type="submit" class="btn btn-primary">作成</button>
+    </form>
+
     <table border='1'>
         <tr>
         <th>id</th>
@@ -20,6 +29,7 @@
         <th>status</th>
         <th>created_at</th>
         <th>updated_at</th>
+        <th>action</th>
         </tr>
         <tr>
         {% for item in list %}
@@ -36,6 +46,7 @@
         <td>{{item.status}}</td>
         <td>{{item.created_at}}</td>
         <td>{{item.updated_at}}</td>
+        <td></td>
         </tr>
         {% endfor %}
     </table>
