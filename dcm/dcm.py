@@ -59,5 +59,24 @@ try:
         cursor.execute(updatedisk)
 except:
         print "Error: unable to fecth data"
+        
+###delete vm###
+'''
+delvmname=''
+check_host="select host_id,disk from instance_list where name='%s' " %delvmname
+cursor.execute(check_host)
+results1 = cursor.fetchall()
+for row in results1:
+    host_id = row[0]
+    redisk=row[1]
+checkdisk1="select total from host_list where host_id='%s' "%host_id
+cursor.execute(checkdisk1)
+results2 = cursor.fetchall()
+for row in results2:
+    updisk = row[0]
+updisk=updisk+redisk
+updatedisk2="UPDATE host_list SET total='%s' WHERE host_id='%s' " %(updisk,host_id)
+cursor.execute(cupdatedisk2)
+'''
 db.close()
 print('The disk of %s updated.' %server_name)
