@@ -2,7 +2,7 @@ import os
 import pymysql as mysql
 import xml.etree.ElementTree as ET
 
-db = mysql.connect(user='root',passwd='Root%123',db='cloud',host='kvmhost01')
+db = mysql.connect(user='root',passwd='root',db='test',host='localhost')
 db.autocommit(True)
 cursor = db.cursor()
 

@@ -4,7 +4,7 @@ import platform
 import psutil
 import pymysql as mysql
 
-db = mysql.connect(user='root',passwd='Root%123',db='cloud',host='kvmhost01')
+db = mysql.connect(user='root',passwd='root',db='test',host='localhost')
 db.autocommit(True)
 cur = db.cursor()
 ###catch###

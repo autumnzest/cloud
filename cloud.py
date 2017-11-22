@@ -4,6 +4,7 @@
 import json
 import database
 import accesslibrary
+import dcm
 from functools import wraps
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, jsonify, request, url_for, abort, Response, render_template

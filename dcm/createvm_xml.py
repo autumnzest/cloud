@@ -6,7 +6,7 @@ import random
 import time
 
 ###catch add data###
-db=mysql.connect(user='root',passwd='Root%123',db='cloud',host='kvmhost01')
+db=mysql.connect(user='root',passwd='root',db='test',host='localhost')
 cursor = db.cursor()
 sql = "SELECT * FROM addvm_list"
 
